@@ -1,4 +1,5 @@
 #change code to implement abstraction ,i.e., oops
+#check for all possible errors from user or code
 import numpy as np
 import getch
 root = "groot"
@@ -13,7 +14,7 @@ chartrack.fill(0)
 answer = ""
 initial = "-"
 for i in range(wordlength):
-	answer = answer + initial
+	answer += initial
 
 #print(answer)
 
@@ -29,18 +30,26 @@ limit = 10#make the attempt limit more realistic, dynamic wrt the word taken as 
 
 remaining = wordlength
 
+choices = ""
+
 while attempts < limit :
-	print("Enter your guess : ",end = "",flush = True)#handle why not printing before getch
-	attempts = attempts + 1
+	print("Enter your guess : ",end = "",flush = True)
 	guess = getch.getche()
-	#add code to make sure no penalization for duplicate attempts
-	#add code to make sure no invalid guesses
 	print()
+	if guess.isalpha() == False :
+		print("Invalid input!!! Please give an alphabet.")
+		continue	
+	if guess in choices:
+		print("Enter a new guess!!!")
+		continue
+	else:
+		choices += guess
+	attempts += 1
 	if guess in root:
 		for i in range(wordlength):
 			if(root[i] == guess):	
 				answer[i] =	root[i]
-				remaining = remaining - 1
+				remaining -= 1
 	if remaining <= 0:
 		print("Congrats!!! You got it right!!! =b=b")
 		break
@@ -51,3 +60,7 @@ while attempts < limit :
 if remaining > 0 :
 	print("Mission Failed. We'll get them next time.")
 print("Reached end of game")
+
+#handle why not printing before getch
+#add code to make sure no penalization for duplicate attempts
+#add code to make sure no invalid guesses
