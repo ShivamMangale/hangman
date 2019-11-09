@@ -2,7 +2,7 @@
 #check for all possible errors from user or code
 import numpy as np
 import getch
-root = "groot"
+root = "guessthis"
 #add code to make sure valid root
 wordlength = len(root)
 
